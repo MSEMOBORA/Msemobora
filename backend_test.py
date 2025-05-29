@@ -267,55 +267,57 @@ class TestMsemoboraBackend(unittest.TestCase):
         
         print(f"✅ Departments test passed: Retrieved {len(data['departments'])} departments")
 
-    def run_all_tests(self):
-        """Run all tests in sequence"""
-        print("\n🔍 Starting Msemobora Backend API Tests...\n")
+def run_all_tests():
+    """Run all tests in sequence"""
+    print("\n🔍 Starting Msemobora Backend API Tests...\n")
+    
+    try:
+        test = TestMsemoboraBackend()
+        test.setUp()
         
-        try:
-            # Test root endpoint
-            self.test_root_endpoint()
-            
-            # Test feedback submission with different sentiments
-            print("\n--- Testing Feedback Submission API ---")
-            positive_id = self.test_feedback_submission_positive()
-            negative_id = self.test_feedback_submission_negative()
-            neutral_id = self.test_feedback_submission_neutral()
-            self.test_feedback_submission_no_employee_id()
-            
-            # Test feedback retrieval
-            print("\n--- Testing Feedback Retrieval API ---")
-            self.test_get_feedback()
-            self.test_get_feedback_with_department_filter()
-            self.test_get_feedback_with_sentiment_filter()
-            
-            # Test dashboard data
-            print("\n--- Testing Dashboard Data API ---")
-            dashboard_data = self.test_dashboard_data()
-            self.test_dashboard_with_department_filter()
-            self.test_dashboard_with_date_filter()
-            
-            # Test insights
-            print("\n--- Testing Actionable Insights API ---")
-            self.test_insights()
-            
-            # Test departments
-            print("\n--- Testing Departments API ---")
-            self.test_departments()
-            
-            print("\n✅ All tests completed successfully!")
-            
-            # Print summary of dashboard data
-            print("\n📊 Dashboard Data Summary:")
-            print(f"Total Feedback: {dashboard_data['total_feedback']}")
-            print(f"Sentiment Distribution: {json.dumps(dashboard_data['sentiment_distribution'], indent=2)}")
-            print(f"Department Breakdown: {json.dumps(dashboard_data['department_breakdown'], indent=2)}")
-            
-            return True
-            
-        except Exception as e:
-            print(f"\n❌ Test failed: {str(e)}")
-            return False
+        # Test root endpoint
+        test.test_root_endpoint()
+        
+        # Test feedback submission with different sentiments
+        print("\n--- Testing Feedback Submission API ---")
+        positive_id = test.test_feedback_submission_positive()
+        negative_id = test.test_feedback_submission_negative()
+        neutral_id = test.test_feedback_submission_neutral()
+        test.test_feedback_submission_no_employee_id()
+        
+        # Test feedback retrieval
+        print("\n--- Testing Feedback Retrieval API ---")
+        test.test_get_feedback()
+        test.test_get_feedback_with_department_filter()
+        test.test_get_feedback_with_sentiment_filter()
+        
+        # Test dashboard data
+        print("\n--- Testing Dashboard Data API ---")
+        dashboard_data = test.test_dashboard_data()
+        test.test_dashboard_with_department_filter()
+        test.test_dashboard_with_date_filter()
+        
+        # Test insights
+        print("\n--- Testing Actionable Insights API ---")
+        test.test_insights()
+        
+        # Test departments
+        print("\n--- Testing Departments API ---")
+        test.test_departments()
+        
+        print("\n✅ All tests completed successfully!")
+        
+        # Print summary of dashboard data
+        print("\n📊 Dashboard Data Summary:")
+        print(f"Total Feedback: {dashboard_data['total_feedback']}")
+        print(f"Sentiment Distribution: {json.dumps(dashboard_data['sentiment_distribution'], indent=2)}")
+        print(f"Department Breakdown: {json.dumps(dashboard_data['department_breakdown'], indent=2)}")
+        
+        return True
+        
+    except Exception as e:
+        print(f"\n❌ Test failed: {str(e)}")
+        return False
 
 if __name__ == "__main__":
-    test_suite = TestMsemoboraBackend()
-    test_suite.run_all_tests()
+    run_all_tests()

@@ -4,7 +4,7 @@ import time
 from datetime import datetime, timedelta
 import unittest
 
-# Get the backend URL from the frontend .env file
+# Backend URL
 BACKEND_URL = "https://fa80b6e3-828c-47ac-b62a-99942887e481.preview.emergentagent.com"
 API_BASE_URL = f"{BACKEND_URL}/api"
 
